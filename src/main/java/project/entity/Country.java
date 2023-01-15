@@ -1,5 +1,6 @@
 package project.entity;
 
+import com.opencsv.bean.CsvBindByPosition;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,8 +18,9 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @CsvBindByPosition(position = 0)
     private String name;
-
+    @CsvBindByPosition(position = 1)
     private String capital;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -31,10 +33,8 @@ public class Country {
             inverseJoinColumns = @JoinColumn(name = "continent_id"))
     private Continent continent;
 
-
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<County> counties = new HashSet<>();
-
 
     public void addCounty(County county) {
         counties.add(county);

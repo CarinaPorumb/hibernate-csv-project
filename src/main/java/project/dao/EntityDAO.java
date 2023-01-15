@@ -7,7 +7,7 @@ public interface EntityDAO <E, I>{
 
     void create(E e);
 
-    void createAll(Set<E> e);
+    void createAll(List<E> e);
 
     E createAndReturn(E e);
 

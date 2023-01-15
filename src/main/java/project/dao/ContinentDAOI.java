@@ -11,7 +11,6 @@ import project.exception.IdNotFound;
 import project.util.HibernateUtil;
 
 import java.util.List;
-import java.util.Set;
 
 public class ContinentDAOI implements EntityDAO<Continent, Integer> {
 
@@ -30,7 +29,7 @@ public class ContinentDAOI implements EntityDAO<Continent, Integer> {
     }
 
     @Override
-    public void createAll(Set<Continent> continents) {
+    public void createAll(List<Continent> continents) {
         LOGGER.info("Creating continents: {}", continents);
         openSessionAndTransaction();
         continents.forEach(continent -> session.persist(continent));

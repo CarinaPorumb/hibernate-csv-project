@@ -27,7 +27,6 @@ public class County {
             inverseJoinColumns = @JoinColumn(name = "country_id"))
     private Country country;
 
-
     @Override
     public String toString() {
         return "County{" +

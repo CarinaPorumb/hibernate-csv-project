@@ -1,11 +1,7 @@
 package project.entity;
 
-import com.github.javafaker.Animal;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
