@@ -8,13 +8,13 @@ The subject of the project is the relational database mapping between continent,
 
 ## Technologies Used:
 
-* ###### Java 20
-* ###### JDK 20
-* ###### Apache Maven 3.9.1
-* ###### MySQL Connector 8.0.32
-* ###### Lombok 1.18.26
-* ###### Hibernate 6.2.1.Final
-* ###### OpenCSV 5.7.1
+* Java 20
+* JDK 20
+* Apache Maven 3.9.1
+* MySQL Connector 8.0.32
+* Lombok 1.18.26
+* Hibernate 6.2.1.Final
+* OpenCSV 5.7.1
 
 ---
 
@@ -48,3 +48,5 @@ Clone this repository to your local machine.`git clone https://github.com/Carina
 
 
 Run the project by executing the `Main` method in the `Main` class.
+
+---

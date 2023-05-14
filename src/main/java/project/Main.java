@@ -1,11 +1,14 @@
 package project;
 
-import com.github.javafaker.Faker;
 import com.opencsv.bean.CsvToBeanBuilder;
+import net.datafaker.Faker;
 import project.dao.ContinentDAOI;
 import project.dao.CountryDAOI;
 import project.dao.EntityDAO;
-import project.entity.*;
+import project.entity.Continent;
+import project.entity.Country;
+import project.entity.County;
+import project.entity.President;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -20,11 +23,11 @@ public class Main {
         EntityDAO<Country, Integer> countries = new CountryDAOI();
         countries.createAll(createCountry());
 
+        System.out.println(readData());
     }
 
     public static List<Country> createCountry() {
         List<Country> countries = readData();
-        //   EntityDAO<Country, Integer> countryDAO = new CountryDAOI();
         Faker faker = new Faker();
 
         Continent continent = new Continent("Europe");
@@ -52,6 +55,7 @@ public class Main {
             return new CsvToBeanBuilder<Country>(new FileReader(PATH))
                     .withType(Country.class)
                     .withSkipLines(1)
+                    .withSkipLines(5)
                     .build()
                     .parse();
         } catch (FileNotFoundException e) {
