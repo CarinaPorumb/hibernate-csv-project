@@ -3,10 +3,7 @@ package project.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -34,6 +31,7 @@ public class Continent extends Auditable {
     @ToString.Exclude
     @OneToMany(mappedBy = "continent", cascade = CascadeType.ALL)
     private Set<Country> countries = new HashSet<>();
+
 
     public void addCountry(Country country) {
         countries.add(country);
