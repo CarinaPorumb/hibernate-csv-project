@@ -21,10 +21,10 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
         <mapping class="project.entity.Country"/>
-        <mapping class="project.entity.President"/>
         <mapping class="project.entity.Continent"/>
-        <mapping class="project.entity.County"/>
         <mapping class="project.entity.City"/>
+        <mapping class="project.entity.Language"/>
+        <mapping class="project.entity.TouristAttraction"/>
 
     </session-factory>
 </hibernate-configuration>

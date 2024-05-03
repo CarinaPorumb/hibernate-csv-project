@@ -16,9 +16,9 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @ToString
-public class Continent extends Auditable {
+@Entity
+public class Language extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,27 +27,20 @@ public class Continent extends Auditable {
     @NotEmpty
     private String name;
 
-    public Continent(String name) {
-        this.name = name;
-    }
+    private boolean isOfficial;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "continent", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "languages")
     private Set<Country> countries = new HashSet<>();
-
-    public void addCountry(Country country) {
-        countries.add(country);
-        country.setContinent(this);
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Continent continent = (Continent) o;
+        Language language = (Language) o;
 
-        return Objects.equals(id, continent.id);
+        return Objects.equals(id, language.id);
     }
 
     @Override

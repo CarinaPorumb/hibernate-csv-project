@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Builder
 @Getter
@@ -15,9 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 @Entity
-public class City extends Auditable {
-
-    //  City IsCapital: A boolean to indicate if the city is the capital of its country. This can simplify queries for capitals.
+public class TouristAttraction extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,25 +22,26 @@ public class City extends Auditable {
     @NotEmpty
     private String name;
 
-    private boolean isCapital;
+    private String description;
 
-    @ManyToOne
+    private String type; //museum, natural park, historical site
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    private City city;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;
-
-    @ToString.Exclude
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
-    private Set<TouristAttraction> touristAttractions = new HashSet<>();
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        City city = (City) o;
+        TouristAttraction that = (TouristAttraction) o;
 
-        return Objects.equals(id, city.id);
+        return Objects.equals(id, that.id);
     }
 
     @Override

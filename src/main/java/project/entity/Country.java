@@ -1,53 +1,80 @@
 package project.entity;
 
-import com.opencsv.bean.CsvBindByPosition;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Country {
+public class Country extends Auditable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @CsvBindByPosition(position = 0)
+    @NotEmpty
     private String name;
-    @CsvBindByPosition(position = 1)
-    private String capital;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private President president;
+    private String governmentType;
 
-    @ManyToOne
-    @JoinTable(
-            name = "continent_country",
-            joinColumns = @JoinColumn(name = "country_id"),
-            inverseJoinColumns = @JoinColumn(name = "continent_id"))
+    private String currency;
+
+    private Integer population;
+
+    private Long area;
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     private Continent continent;
 
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<County> counties = new HashSet<>();
+    @OneToMany(mappedBy = "country")
+    private Set<City> cities = new HashSet<>();
 
-    public void addCounty(County county) {
-        counties.add(county);
-        county.setCountry(this);
-    }
+    @OneToMany(mappedBy = "country")
+    private Set<TouristAttraction> touristAttractions = new HashSet<>();
+
+
+    @Builder.Default
+    @ManyToMany
+    @JoinTable(
+            name = "country_language",
+            joinColumns = @JoinColumn(name = "country_id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id"))
+    private Set<Language> languages = new HashSet<>();
+
 
     @Override
     public String toString() {
         return "Country{" +
-                "id=" + id +
+                //   "id=" + id +
                 ", name='" + name + '\'' +
-                ", capital='" + capital + '\'' +
-                ", continent=" + continent.getName() +
+                //  ", continent=" + continent.getName() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Country country = (Country) o;
+
+        return Objects.equals(id, country.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }
