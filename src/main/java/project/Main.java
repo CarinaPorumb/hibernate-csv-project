@@ -14,19 +14,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        CountryDAOImpl countryDAO = new CountryDAOImpl();
-        CountryParser countryParser = new CountryParser();
-
-        List<CountryCsv> countryCsvList = countryParser.readData();
-
-        CountryMapper countryMapper = new CountryMapperImpl();
-
-        List<Country> countries = countryCsvList
-                .stream()
-                .map(countryMapper::countryCsvToCountry)
-                .toList();
-
-        EntityDAO<Country, Long> entityDAO = countryDAO;
-        entityDAO.createAll(countries);
+//        CountryDAOImpl countryDAO = new CountryDAOImpl();
+//        CountryParser countryParser = new CountryParser();
+//
+//        List<CountryCsv> countryCsvList = countryParser.readData();
+//
+//        CountryMapper countryMapper = new CountryMapperImpl();
+//
+//        List<Country> countries = countryCsvList
+//                .stream()
+//                .map(countryMapper::countryCsvToCountry)
+//                .toList();
+//
+//        EntityDAO<Country, Long> entityDAO = countryDAO;
+//        entityDAO.createAll(countries);
     }
 }

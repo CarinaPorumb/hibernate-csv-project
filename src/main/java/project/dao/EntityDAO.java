@@ -1,9 +1,8 @@
 package project.dao;
 
 import java.util.List;
-import java.util.Set;
 
-public interface EntityDAO <E, I>{
+public interface EntityDAO<E, I>{
 
     void create(E e);
 
