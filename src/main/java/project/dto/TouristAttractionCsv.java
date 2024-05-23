@@ -1,5 +1,6 @@
 package project.dto;
 
+import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
 import lombok.Data;
 

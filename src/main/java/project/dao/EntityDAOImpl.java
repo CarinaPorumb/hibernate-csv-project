@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import project.util.HibernateUtil;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 public class EntityDAOImpl<E, I> implements EntityDAO<E, I> {
@@ -163,6 +164,20 @@ public class EntityDAOImpl<E, I> implements EntityDAO<E, I> {
                 LOGGER.error("Error deleting all entities", e);
                 throw new RuntimeException("Error deleting all entities: " + e.getMessage(), e);
             }
+        }
+    }
+
+    public Optional<E> findByName(String name) {
+        LOGGER.info("Finding entity by name: {}", name);
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM " + entityType.getName() + " e WHERE e.name = :name";
+            E entity = session.createQuery(hql, entityType)
+                    .setParameter("name", name)
+                    .uniqueResult();
+            return Optional.ofNullable(entity);
+        } catch (Exception e) {
+            LOGGER.error("Error finding entity by name: {}", name, e);
+            throw new RuntimeException("Error finding entity by name: " + name, e);
         }
     }
 }

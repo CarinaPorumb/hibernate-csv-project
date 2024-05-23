@@ -2,7 +2,6 @@ package project.dto;
 
 import com.opencsv.bean.CsvBindByPosition;
 import lombok.Data;
-import project.entity.Continent;
 
 @Data
 public class CountryCsv {
@@ -23,5 +22,6 @@ public class CountryCsv {
     private Long area;
 
     @CsvBindByPosition(position = 5)
-    private Continent continent;
+    private String continentName;
+
 }

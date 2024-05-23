@@ -11,7 +11,6 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 public class TouristAttraction extends Auditable {
 
@@ -33,6 +32,19 @@ public class TouristAttraction extends Auditable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;
+
+    @Override
+    public String toString() {
+        assert country != null;
+        return "TouristAttraction{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", type='" + type + '\'' +
+                ", city=" + (city != null ? city.getName() :null) +
+                ", country=" + (country != null ? country.getName() : null) +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {

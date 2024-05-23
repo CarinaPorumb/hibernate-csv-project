@@ -13,11 +13,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 public class City extends Auditable {
-
-    //  City IsCapital: A boolean to indicate if the city is the capital of its country. This can simplify queries for capitals.
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +25,7 @@ public class City extends Auditable {
 
     private boolean isCapital;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;
 

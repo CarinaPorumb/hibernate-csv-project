@@ -36,6 +36,7 @@ public class Country extends Auditable {
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "continent_id")
     private Continent continent;
 
     @OneToMany(mappedBy = "country")
@@ -57,9 +58,13 @@ public class Country extends Auditable {
     @Override
     public String toString() {
         return "Country{" +
-                //   "id=" + id +
+                "id=" + id +
                 ", name='" + name + '\'' +
-                //  ", continent=" + continent.getName() +
+                ", governmentType='" + governmentType + '\'' +
+                ", currency='" + currency + '\'' +
+                ", population=" + population +
+                ", area=" + area +
+                ", continent=" + (continent != null ? continent.getName() : null) +
                 '}';
     }
 
